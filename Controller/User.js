@@ -4,7 +4,9 @@ let jwt = require("jsonwebtoken")
 
 exports.secure = async function (req, res, next) {
   try {
+
     let token = req.headers.authorization
+    console.log(req.headers.authorization);
     if (!token) throw new Error("Please enter a token")
 
     let verify = jwt.verify(token, "QUIS")
@@ -14,6 +16,7 @@ exports.secure = async function (req, res, next) {
     if (!userVerify) throw new Error("User not found")
 
     next()
+
   } catch (error) {
     res.status(400).json({
       status: "Fail",
@@ -53,11 +56,12 @@ exports.UserLogin = async function (req, res, next) {
     let passwordCompare = await bcrypt.compare(req.body.password, userFind.password)
     if (!passwordCompare) throw new Error("Password Invalid!")
 
+    var token = jwt.sign({ id: userFind._id }, 'QUIS');
 
     res.status(200).json({
       status: "Success",
       message: "User Login SuccessFully!",
-      data: userFind
+      data: token
 
     })
 
@@ -154,3 +158,4 @@ exports.UserUpdate = async function (req, res, next) {
     })
   }
 }
+

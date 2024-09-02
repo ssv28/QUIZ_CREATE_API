@@ -1,8 +1,7 @@
-var express = require('express');
-var router = express.Router();
+let express = require('express');
+let router = express.Router();
 
 let UserController = require("../Controller/User")
-
 
 
 //SIGN UP
@@ -14,7 +13,7 @@ router.post('/login', UserController.UserLogin);
 
 
 //ALL DATA FIND
-router.get('/find', UserController.FindData);
+router.get('/find', UserController.secure, UserController.FindData);
 
 
 //FIND ONE

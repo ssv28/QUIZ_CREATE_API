@@ -1,8 +1,6 @@
 let QUIZ = require('../Models/quiz');
 let jwt = require("jsonwebtoken")
 
-
-
 exports.QuizCreate = async function (req, res, next) {
     try {
 
@@ -27,7 +25,7 @@ exports.FindData = async function (req, res, next) {
     try {
         // let quizFind = await QUIZ.find().populate("Question")
 
-        let quizFind = await QUIZ.find()
+        let quizFind = await QUIZ.find().populate('Question')
 
         res.status(200).json({
             status: "Success",
@@ -48,7 +46,8 @@ exports.FindData = async function (req, res, next) {
 exports.FindId = async function (req, res, next) {
     try {
 
-        let quizFind = await QUIZ.findById(req.params.id)
+        let quizFind = await QUIZ.findById(req.params.id).populate('Question')
+        if (!quizFind) throw new Error('Quiz not found');
 
         res.status(200).json({
             status: "Success",
@@ -89,6 +88,7 @@ exports.QuizUpdate = async function (req, res, next) {
         console.log("===>>>", req.body);
 
         let quizUpdate = await QUIZ.findByIdAndUpdate(req.params.id, req.body, { new: true })
+        if (!quizUpdate) throw new Error ('Quiz not found');
 
         console.log(req.params.id);
         console.log("~~~~~~>>>>", req.body);

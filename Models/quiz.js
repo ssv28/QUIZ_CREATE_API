@@ -6,12 +6,10 @@ const quizDataSchema = new Schema({
     title: {
         type: String,
         required: true,
-        // trim: true
     },
 
     description: {
         type: String,
-        // trim: true
     },
 
     questions: [

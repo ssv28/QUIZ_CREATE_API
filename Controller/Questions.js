@@ -47,6 +47,7 @@ exports.FindId = async function (req, res, next) {
     try {
 
         let quesFind = await Question.findById(req.params.id)
+        if(!quesFind) throw new Error ("Question not found!")
 
         res.status(200).json({
             status: "Success",
@@ -87,6 +88,8 @@ exports.QuesUpdate = async function (req, res, next) {
         console.log("===>>>", req.body);
 
         let quesUpdate = await Question.findByIdAndUpdate(req.params.id, req.body, { new: true })
+        if(!quesUpdate) throw new Error ("Question not found!")
+
 
         console.log(req.params.id);
         console.log("~~~~~~>>>>", req.body);

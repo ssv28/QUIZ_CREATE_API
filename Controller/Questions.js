@@ -1,17 +1,15 @@
-let QUIZ = require('../Models/quiz');
+let Question = require('../Models/questions');
 let jwt = require("jsonwebtoken")
-
-
 
 exports.QuesCreate = async function (req, res, next) {
     try {
 
-        let quizCreate = await QUIZ.create(req.body)
+        let QuesCreate = await Question.create(req.body)
 
         res.status(200).json({
             status: "Success",
-            message: "Quiz Create SuccessFully!",
-            data: quizCreate
+            message: "Question Create SuccessFully!",
+            data: QuesCreate
 
         })
     } catch (error) {
@@ -26,14 +24,13 @@ exports.QuesCreate = async function (req, res, next) {
 exports.FindData = async function (req, res, next) {
     try {
 
-        let quesFind = await QUIZ.find()
-        var token = jwt.sign({ id: quesFind._id }, 'QUIS');
+        let quesFind = await Question.find().populate('quizID')
 
 
         res.status(200).json({
             status: "Success",
             message: "Question Found SuccessFully!",
-            data: token
+            data: quesFind
 
         })
 
@@ -49,7 +46,7 @@ exports.FindData = async function (req, res, next) {
 exports.FindId = async function (req, res, next) {
     try {
 
-        let quesFind = await QUIZ.findById(req.params.id)
+        let quesFind = await Question.findById(req.params.id)
 
         res.status(200).json({
             status: "Success",
@@ -69,7 +66,7 @@ exports.FindId = async function (req, res, next) {
 exports.QuesDelete = async function (req, res, next) {
     try {
 
-        await QUIZ.findByIdAndDelete(req.params.id)
+        await Question.findByIdAndDelete(req.params.id)
 
         res.status(200).json({
             status: "Success",
@@ -89,7 +86,7 @@ exports.QuesUpdate = async function (req, res, next) {
 
         console.log("===>>>", req.body);
 
-        let quesUpdate = await QUIZ.findByIdAndUpdate(req.params.id, req.body, { new: true })
+        let quesUpdate = await Question.findByIdAndUpdate(req.params.id, req.body, { new: true })
 
         console.log(req.params.id);
         console.log("~~~~~~>>>>", req.body);

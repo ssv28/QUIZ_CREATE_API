@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;   // Create a new schema
 const questionSchema = new Schema({
 
-    quiz: {
+    quizID: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'QUIZ',
         required: true

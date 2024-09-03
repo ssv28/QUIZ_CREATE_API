@@ -28,13 +28,11 @@ exports.FindData = async function (req, res, next) {
         // let quizFind = await QUIZ.find().populate("Question")
 
         let quizFind = await QUIZ.find()
-        var token = jwt.sign({ id: quizFind._id }, 'QUIS');
-
 
         res.status(200).json({
             status: "Success",
             message: "Quiz Data Found SuccessFully!",
-            data: token
+            data: quizFind
 
         })
 

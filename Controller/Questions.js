@@ -3,7 +3,7 @@ let jwt = require("jsonwebtoken")
 
 
 
-exports.QuizCreate = async function (req, res, next) {
+exports.QuesCreate = async function (req, res, next) {
     try {
 
         let quizCreate = await QUIZ.create(req.body)
@@ -25,15 +25,14 @@ exports.QuizCreate = async function (req, res, next) {
 
 exports.FindData = async function (req, res, next) {
     try {
-        // let quizFind = await QUIZ.find().populate("Question")
 
-        let quizFind = await QUIZ.find()
-        var token = jwt.sign({ id: quizFind._id }, 'QUIS');
+        let quesFind = await QUIZ.find()
+        var token = jwt.sign({ id: quesFind._id }, 'QUIS');
 
 
         res.status(200).json({
             status: "Success",
-            message: "Quiz Data Found SuccessFully!",
+            message: "Question Found SuccessFully!",
             data: token
 
         })
@@ -50,12 +49,12 @@ exports.FindData = async function (req, res, next) {
 exports.FindId = async function (req, res, next) {
     try {
 
-        let quizFind = await QUIZ.findById(req.params.id)
+        let quesFind = await QUIZ.findById(req.params.id)
 
         res.status(200).json({
             status: "Success",
-            message: "Quiz Data Find SuccessFully!",
-            data: quizFind
+            message: "Question Find SuccessFully!",
+            data: quesFind
 
         })
 
@@ -67,14 +66,14 @@ exports.FindId = async function (req, res, next) {
     }
 }
 
-exports.QuizDelete = async function (req, res, next) {
+exports.QuesDelete = async function (req, res, next) {
     try {
 
         await QUIZ.findByIdAndDelete(req.params.id)
 
         res.status(200).json({
             status: "Success",
-            message: "Quiz Data Delete SuccessFully!",
+            message: "Question Delete SuccessFully!",
         })
 
     } catch (error) {
@@ -85,22 +84,22 @@ exports.QuizDelete = async function (req, res, next) {
     }
 }
 
-exports.QuizUpdate = async function (req, res, next) {
+exports.QuesUpdate = async function (req, res, next) {
     try {
 
         console.log("===>>>", req.body);
 
-        let quizUpdate = await QUIZ.findByIdAndUpdate(req.params.id, req.body, { new: true })
+        let quesUpdate = await QUIZ.findByIdAndUpdate(req.params.id, req.body, { new: true })
 
         console.log(req.params.id);
         console.log("~~~~~~>>>>", req.body);
 
-        console.log(">>>>>", quizUpdate);
+        console.log(">>>>>", quesUpdate);
 
         res.status(200).json({
             status: "Success",
-            message: "Quiz Data Update SuccessFully!",
-            data: quizUpdate
+            message: "Questions Update SuccessFully!",
+            data: quesUpdate
         })
 
     } catch (error) {

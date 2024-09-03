@@ -14,12 +14,12 @@ const quizDataSchema = new Schema({
         // trim: true
     },
 
-    // questions: [
-    //     {
-    //         type: mongoose.Schema.Types.ObjectId,
-    //         ref: 'Question'
-    //     }
-    // ],
+    questions: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Question'
+        }
+    ],
 
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,

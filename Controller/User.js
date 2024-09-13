@@ -61,7 +61,8 @@ exports.UserLogin = async function (req, res, next) {
     res.status(200).json({
       status: "Success",
       message: "User Login SuccessFully!",
-      data: token
+      data: userFind,
+      token
 
     })
 

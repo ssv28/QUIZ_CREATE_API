@@ -17,15 +17,15 @@ router.get('/find', UserController.secure, UserController.FindData);
 
 
 //FIND ONE
-router.get('/findid/:id', UserController.FindId);
+router.get('/findid/:id', UserController.secure, UserController.FindId);
 
 
 //DELETE DATA
-router.delete('/delete/:id', UserController.UserDelete);
+router.delete('/delete/:id', UserController.secure, UserController.UserDelete);
 
 
 //UPDATE DATA
-router.patch('/update/:id', UserController.UserUpdate);
+router.patch('/update/:id', UserController.secure, UserController.UserUpdate);
 
 
 module.exports = router;

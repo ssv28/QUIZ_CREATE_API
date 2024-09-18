@@ -27,7 +27,7 @@ exports.FindData = async function (req, res, next) {
     try {
         // let quizFind = await QUIZ.find().populate("Question")
 
-        let quizFind = await QUIZ.find().populate('Question')
+        let quizFind = await QUIZ.find().populate('questions').populate("createdBy")
 
         res.status(200).json({
             status: "Success",
@@ -48,7 +48,7 @@ exports.FindData = async function (req, res, next) {
 exports.FindId = async function (req, res, next) {
     try {
 
-        let quizFind = await QUIZ.findById(req.params.id).populate('Question')
+        let quizFind = await QUIZ.findById(req.params.id)
         if (!quizFind) throw new Error('Quiz not found');
 
         res.status(200).json({
